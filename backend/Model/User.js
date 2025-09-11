@@ -20,6 +20,10 @@ const UserSchema= new mongoose.Schema({
     address:{
         type:String
     },
+     password: {
+        type: String,
+        required: true
+    },
     aadharCardNumber:{
         type:Number,
         required:true,
@@ -53,12 +57,12 @@ const hashedPassword = await bcrypt.hash(user.password, salt);
 })
 
 
-UserSchema.method.comparePassword= async function(candidatePassword){
+UserSchema.methods.comparePassword= async function(candidatePassword){
     try {
         const isMatch = await bcrypt.compare(candidatePassword, this.password);
         return isMatch;
     } catch (error) {
-        
+        throw error;
     }
 }
 

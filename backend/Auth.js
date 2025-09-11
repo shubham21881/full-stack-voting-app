@@ -22,6 +22,8 @@ const jwtAuthMiddleware=(req,res,next)=>{
           const decoded=jwt.verify(token,process.env.JWT_SECRET)
 
             req.person=decoded;
+            console.log("auth k middleware start hua hai");
+            
             next()
 
 

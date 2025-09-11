@@ -1,0 +1,66 @@
+import { useState } from 'react'
+import { useContext } from 'react'
+import { AuthContext } from './Context/AuthContext'
+import { Navbar } from './Components/Index'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Home from './Pages/Home'
+import Login from './Pages/Login'
+import Signup from './Pages/Signup'
+import Candidate from './Pages/Candidate'
+import VoteResults from './Pages/VoteResults'
+import Profile from './Pages/Profile'
+import AdminDashboard from './Pages/AdminDashboard'
+import ErrorPage from './Pages/ErrorPage'
+import Layout from './Components/Layout'
+
+
+
+
+
+
+ const router= createBrowserRouter([
+  {
+    path:"/",
+    element:<Layout/>,
+    errorElement:<ErrorPage/>,
+    children:[
+      {path:'/', element:<Home/>},
+      {path:"/login",element:<Login/>},
+      {path:"/signup",element:<Signup/>},
+      {path:"/candidate",element:<Candidate/>},
+      {path:"results",element:<VoteResults/>},
+      {path:"profile",element:<Profile/>},
+      {path:"/admin",element:<AdminDashboard/>},
+      
+    ]
+  }
+ ])
+
+
+
+
+
+
+
+
+function App() {
+  
+
+
+
+
+
+
+
+
+
+  return (
+    <>
+    
+      
+      <RouterProvider router={router}/>
+    </>
+  )
+}
+
+export default App
