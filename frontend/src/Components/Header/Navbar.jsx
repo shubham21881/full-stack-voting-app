@@ -1,38 +1,64 @@
 
 import { Link } from "react-router-dom";
-import { useContext } from 'react';
+import { useContext,useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
  const navigate=useNavigate()
   const { user, logout } = useContext(AuthContext);
-
+  const [isOpen,setisopen]=useState(false)
   function handlelogout(){
+     setisopen(false)
      logout()
      navigate('/')
-
   }
 
   return (
-    <nav className="flex justify-between items-center px-6 py-3 shadow bg-white">
+    <nav className="flex justify-between  items-center px-3 py-3 shadow  gap-2.5  sm:w-screen left-2 top-1 lg:bg-white max-w-[100%]    left-[40px]    z-50 border-2 rounded-2xl   border-black  ">
       <h1 className="text-xl font-bold text-blue-600">Voting App</h1>
-      <div className="flex gap-4">
-        <Link to="/">Home</Link>
-        <Link to="/candidate">Candidates</Link>
-        <Link to="/results">Results</Link>
-        {user && <Link to="/profile">Profile</Link>}
-        {user?.role === "admin" && <Link to="/admin">Admin</Link>}
+
+      <div className={`  flex flex-col sm:hidden  absolute z-80 top-[50px] right-0 rounded-2xl bg-black text-white font-extrabold fixed  w-3/4 p-5 pt-5 pb-5 space-y-4 transition-all duration-1000 ease-in-out ${isOpen? 'scale-100 opacity-100':'scale-0 opacity-0'}   `}>
+        <NavLink className="text-right" onClick={()=>setisopen(false)}><span> click</span></NavLink>
+        <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-300"} to={"/"}>Home</NavLink>
+        <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-300"} to={"/candidate"}>Candidates</NavLink>
+        <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-300"} to={"/results"}>Results</NavLink>
+        {user && <NavLink onClick={()=>setisopen(false)}  className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-300"} to="/profile">Profile</NavLink>}
+        {user?.role === "admin" && <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-300"} to="/admin">Admin</NavLink>}
         {!user ? (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
+            <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-300"} to="/login">Login</NavLink>
+            <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-300"} to="/signup">Signup</NavLink>
           </>
         ) : (
-          <button onClick={handlelogout}>Logout</button>
+          <button className="bg-[#A084DC] px-5 rounded-2xl" onClick={handlelogout}>Logout</button>
         )}
       </div>
+      <span onClick={()=>setisopen(!isOpen)} className='sm:hidden'><button>click</button></span>
+
+      <div className={` hidden sm:flex items-center gap-6  `}>
+        <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-600"} to={"/"}>Home</NavLink>
+        <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-600"} to="/candidate">Candidates</NavLink>
+        <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-600"} to="/results">Results</NavLink>
+        {user && <NavLink onClick={()=>setisopen(false)}  className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-600"} to="/profile">Profile</NavLink>}
+        {user?.role === "admin" && <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-600"} to="/admin">Admin</NavLink>}
+        {!user ? (
+          <>
+            <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-600"} to="/login">Login</NavLink>
+            <NavLink onClick={()=>setisopen(false)} className={({isActive})=> isActive? "text-[#A084DC] font-bold" : "text-gray-600"} to="/signup">Signup</NavLink>
+          </>
+        ) : (
+          <button className="bg-[#A084DC] px-5 rounded-2xl text-white" onClick={handlelogout}>Logout</button>
+        )}
+      </div>
+         {/* <div className=" h-full w-screen absolute z-40 bg-transparent">
+          <h1>Click</h1>
+         </div> */}
+
+         
+
+
     </nav>
   )
 }

@@ -1,6 +1,17 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../config/Config';
 
+ const publicApi=axios.create({
+    baseURL:API_BASE_URL,
+    withCredentials:true,
+    headers:{
+        "Content-Type":'application/json'
+    }
+})
+
+
+
+// protected API instance (require auth)
 const api=axios.create({
     baseURL:API_BASE_URL,
     withCredentials:true,
@@ -8,6 +19,9 @@ const api=axios.create({
         'Content-Type': 'application/json'
     }
 });
+
+
+
 
 
 // Add request interceptor to include token
@@ -32,8 +46,8 @@ api.interceptors.response.use(
     (error) => {
         // Handle errors (401 Unauthorized, etc.)
         if (error.response && error.response.status === 401) {
-  localStorage.removeItem('token');
-  window.location.href = '/login';
+//   localStorage.removeItem('token');
+//   window.location.href = '/login';
 }
         return Promise.reject(error);
     }
@@ -62,7 +76,7 @@ export const login=async(aadharCardNumber,password)=>{
 
 
  export  const getCandidates=async()=>{
-    const res= await api.get('/candidate');
+    const res= await publicApi.get('/candidate');
     // console.log(res.data);
     
     return res.data;
@@ -71,7 +85,7 @@ export const login=async(aadharCardNumber,password)=>{
 
 
 export const voteCandidate= async(candidateid,userid)=>{
-    const res= await api.get(`/candidate/vote/${candidateid}/${userid}`);
+    const res= await api.get(`/candidate/vote/${candidateid}`);
     console.log(res.data);
     
     return res.data;
@@ -83,8 +97,18 @@ export const voteCandidate= async(candidateid,userid)=>{
 
 
 export const getVoteCounts=async()=>{
-    const res=await api.get('/candidate/vote/count');
-    return res.data
+    try {
+        // Use publicApi instead of api since this route doesn't require authentication
+        const res = await publicApi.get('/candidate/vote/count');
+        console.log(res.data);
+        
+        return res.data;
+    } catch (error) {
+        console.error('Error fetching vote counts:', error);
+        console.error('Error response:',error,response?.data)
+         console.error('Error status:', error.response?.status);
+        throw error;
+    }
 }
 
 // ------------------------------Profile--------------------------------------
@@ -98,8 +122,13 @@ export const getProfile= async()=>{
 
 
 export const updatePassword=async(currentPassword,newPassword)=>{
-    const res= await api.put('/user/profile/password',{currentPassword,newPassword})
-    return res.data;
+    try {
+        const res= await api.put('/user/profile/password',{currentPassword,newPassword})
+         return res.data;
+    } catch (error) {
+        throw error
+    }
+    
 }
 
 

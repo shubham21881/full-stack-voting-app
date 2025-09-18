@@ -34,7 +34,7 @@ router.post('/signup',async (req,res)=>{
    console.log(response);
    
     const  payload={
-     userId:response.id,
+     id:response.id,
      username:response.name
      }
     
@@ -79,7 +79,8 @@ router.post('/login',async(req,res)=>{
       id: User.id,
       name: User.name,
       aadharCardNumber: User.aadharCardNumber,
-      role: User.role
+      role: User.role,
+      isvoted:User.isvoted
     }
 
     })
@@ -110,8 +111,10 @@ router.put('/profile/password',jwtAuthMiddleware,async(req,res)=>{
       }
 
       const person= await user.findById(userid)
+      console.log(person);
+      
 
-if (!person || !(await user.comparePassword(currentPassword))) {
+if (!person || !(await person.comparePassword(currentPassword))) {
           return res.status(401).json({ error: 'Invalid current password' });
       }
 // Update the user's password

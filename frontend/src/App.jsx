@@ -12,6 +12,7 @@ import Profile from './Pages/Profile'
 import AdminDashboard from './Pages/AdminDashboard'
 import ErrorPage from './Pages/ErrorPage'
 import Layout from './Components/Layout'
+import Updatepassword from './Pages/Updatepassword'
 
 
 
@@ -31,6 +32,7 @@ import Layout from './Components/Layout'
       {path:"results",element:<VoteResults/>},
       {path:"profile",element:<Profile/>},
       {path:"/admin",element:<AdminDashboard/>},
+      {path:"/updatepassword",element:<Updatepassword/>},
       
     ]
   }
@@ -59,6 +61,7 @@ function App() {
     
       
       <RouterProvider router={router}/>
+      {/* <Updatepassword/> */}
     </>
   )
 }

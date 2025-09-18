@@ -1,6 +1,6 @@
  import { createContext,useEffect,useState } from "react";
 import { login,signupuser } from "../API/api";
-
+import { getProfile } from "../API/api";
   export const AuthContext= createContext(null);
 
  export  const AuthProvider=(props)=>{
@@ -51,6 +51,18 @@ console.log(user);
    }
 
 
+   const refreshUser=async()=>{
+
+      try {
+         const userData=await getProfile()
+         setuser(userData);
+         localStorage.setItem('user',JSON.stringify(userData));
+
+      } catch (error) {
+         console.error('refresh user error:',error);
+         
+      }
+   }
 
  const logout=()=>{
     setuser(null);
@@ -63,7 +75,7 @@ console.log(user);
 
 return (
 
-   <AuthContext.Provider value={{user,signup,Login,logout}}>
+   <AuthContext.Provider value={{user,signup,Login,logout,refreshUser}}>
       {props.children}
    </AuthContext.Provider>
 )

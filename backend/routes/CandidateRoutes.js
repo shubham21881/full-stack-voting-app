@@ -39,7 +39,7 @@ router.post('/',jwtAuthMiddleware,async(req,res)=>{
 
  router.put('/:candidateID',jwtAuthMiddleware,async(req,res)=>{
     try{
-         if(!checkadminrole(req.user.id))
+         if(! await checkadminrole(req.person.id))
             return res.status(403).json({message: 'user does not have admin role'});
       const  data= req.params.candidateID;
       const updateddata= req.body;
@@ -83,11 +83,34 @@ router.delete('/:candidateID',jwtAuthMiddleware, async (req,res)=>{
 })
 
 
+router.get('/vote/count', async (req, res) => {
+    try {
+        console.log('Vote count endpoint hit');
+        console.log(req.headers);
+        
+        const candidate = await Candidate.find().sort({voteCount: 'desc'});
+        console.log('Candidates found:', candidate.length);
+        
+        const voteRecord = candidate.map((data) => {
+            return [
+                {"party": data.party, "count": data.voteCount}
+            ]
+        });
+
+        console.log('Vote record:', voteRecord);
+        return res.status(200).json(voteRecord);
+    } catch (error) {
+        console.error('Error in vote count endpoint:', error);
+        return res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    }
+});
+
+
 //  let start voting
 
-router.get('/vote/:candidateid/:userid',jwtAuthMiddleware,async(req,res)=>{
+router.get('/vote/:candidateid',jwtAuthMiddleware,async(req,res)=>{
  const CandidateID= req.params.candidateid
- const userID=req.params.userid;
+ const userID=req.person.id;
  console.log(CandidateID,userID);
 
  try{
@@ -131,17 +154,8 @@ router.get('/vote/:candidateid/:userid',jwtAuthMiddleware,async(req,res)=>{
 
 
 
-//  vote count
-router.get('/vote/count',async(req,res)=>{
-    const candidate = await Candidate.find().sort({voteCount: 'desc'});
-    const voteRecord = candidate.map((data)=>{
-        return [
-            {"party": data.party, "count": data.voteCount}
-        ]
-    });
 
-    return res.status(200).json(voteRecord);
-})
+
 
 
 router.get('/',async(req,res)=>{
