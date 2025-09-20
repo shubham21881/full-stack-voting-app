@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import MyBarChart from "../Components/MyBarChart";
+import { DefaultMultipleBarChart } from '../Components/ui/default-multiple-bar-chart';
+import { DefaultBarChart } from '../Components/ui/default-bar-chart';
+import { AnimatedHatchedPatternAreaChart } from '../Components/ui/animated-hatched-pattern-chart';
+import VoteResultsChart from '../Components/VoteResultsChart';
+import OrbitProgress from "react-loading-indicators/OrbitProgress";
+
+
+
+
 function VoteResults() {
     const [votecount, setvotecount] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -31,32 +40,67 @@ function VoteResults() {
         fetchVoteCounts()
     }, [])
 
-    if (loading) return <div>Loading...</div>
+    if (loading) return <div className='w-screen h-screen flex justify-center items-center'><OrbitProgress variant="track-disc" color="#A084DC" size="small"/></div>
     if (error) return <div>Error: {error}</div>
     if (!votecount) return <div>No vote data available</div>
 
     return (
-        <div className="pt-[100px]">
-            <div className='w-1/2 h-1/2'>
-
-            <MyBarChart />
-            </div>
-            <h1 className="text-2xl font-bold mb-4">Election Results</h1>
-            <div className="grid gap-4">
-                {votecount?.map((data, index) => (
-                    <div key={index} className="grid gap-4">
-                        {data.map((info) => (
-                            <div key={info.party} className="border p-4 rounded shadow">
-                                <h2 className="text-xl font-semibold">
-                                    Party: {info.party || 'Independent'}
-                                </h2>
-                                <p className="text-lg">Votes: {info.count}</p>
-                            </div>
-                        ))}
-                    </div>
+        <div className="min-h-screen w-full relative">
+        {/* Purple Gradient Grid Left Background */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+              linear-gradient(to bottom, #f0f0f0 1px, transparent 1px),
+              radial-gradient(800px circle at 0% 200px, #d5c5ff, transparent)
+            `,
+            backgroundSize: "96px 64px, 96px 64px, 100% 100%",
+          }}
+        />
+      
+        {/* Your Content/Components */}
+        <div className="relative z-10 pt-[30px] bg-white/70 backdrop-blur-sm">
+          <div className="sm:w-full h-full">
+            {/* <MyBarChart /> */}
+            {/* <DefaultMultipleBarChart/> */}
+            {/* <DefaultBarChart/> */}
+            {/* <AnimatedHatchedPatternAreaChart/> */}
+            <VoteResultsChart />
+          </div>
+          <h1 className="text-2xl text-center m-2 font-bold mb-4">Election Results</h1>
+          <div className="grid gap-1 m-2">
+          <div
+                 
+                    className="border  sm:p-2 rounded shadow flex justify-between bg-white/80"
+                  >  <span>Ranking</span>
+                    <h3 className=" text-sm sm:text-xl font-semibold">
+                       partyname
+                    </h3>
+                    <p className="text-lg">Votes</p>
+                  </div>
+            {votecount?.map((data, index) => (
+              <div key={index} className="grid gap-4">
+                {data.map((info) => (
+                  <div
+                    key={info.party}
+                    className="border  sm:p-2 rounded shadow flex justify-between bg-white/80"
+                    
+                  > 
+                  {index+1===1?<span className='bg-green-200 min-w-[80px]  text-[15px] min-h-[50%] sm:min-h-[25px] sm:min-w-[100px] rounded-2xl flex justify-center items-center'> winner {index+1}</span>:<span>{index+1}</span>}
+                  
+                    <h3 className=" text-sm ">
+                       {info.party || "Independent"}
+                    </h3>
+                    <p className="text-lg">{info.count}</p>
+                  </div>
                 ))}
-            </div>
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
+      
     )
 }
 

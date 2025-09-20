@@ -24,7 +24,10 @@ const handleupdate=async(e)=>{
      await refreshUser()
      setcurrentpassword('')
      setnewpassword('')
-     navigate('/profile')
+     setTimeout(() => {
+        
+         navigate('/profile')
+     }, 3000);
 
  } catch (error) {
     const errorMessage=error.response?.data?.error || 'failed  to update password'
@@ -39,26 +42,42 @@ const handleupdate=async(e)=>{
 
 
    return (
-     <div className='flex flex-col gap-3 justify-center items-center min-h-screen '>
+      
+      <div className="min-h-screen w-full bg-white relative">
+      {/* Purple Gradient Grid Left Background */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+            linear-gradient(to bottom, #f0f0f0 1px, transparent 1px),
+            radial-gradient(circle 800px at 0% 200px, #d5c5ff, transparent)
+          `,
+          backgroundSize: "96px 64px, 96px 64px, 100% 100%",
+        }}
+      />
+         {/* Your Content/Components */}
+       
+     <div className='flex flex-col relative z-10 gap-3 justify-center items-center min-h-screen  '>
             <h1 className=' text-3xl sm:text-5xl font-bold '>Update password</h1>
-        <form onSubmit={handleupdate} className='flex justify-center items-center gap-3 p-4 flex-col border-2 border-black min-h-[50%] min-w-[50%] rounded-2xl' >
+        <form onSubmit={handleupdate} className='flex justify-center items-center gap-3 p-4 flex-col border-1 border-black min-h-[50%] min-w-[35%] rounded-2xl' >
             <label htmlFor="">Current password</label>
             <input
-             className='border-2 border-black rounded-sm' type="text" 
+             className='border-1 border-black rounded-sm' type="text" 
              value={currentpassword}
              onChange={(e)=> setcurrentpassword(e.target.value)}
               disabled={loading}
              />
             <label htmlFor="">New password</label>
             <input
-             className='border-2 border-black rounded-sm' type="text" 
+             className='border-1 border-black rounded-sm' type="text" 
              value={newpassword}
              onChange={(e)=>setnewpassword(e.target.value)}
               disabled={loading}
              />
             <button 
             type='submit'
-            className='bg-[#A084DC] px-2 rounded-sm'
+            className='bg-[#A084DC] px-2 rounded-sm hover:text-white'
              disabled={loading || !currentpassword || !newpassword}
              
              >
@@ -68,6 +87,7 @@ const handleupdate=async(e)=>{
         <Toaster/>
 
      </div>
+    </div>
    )
  }
  

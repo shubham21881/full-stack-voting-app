@@ -20,9 +20,21 @@ profile()
   
   return (
   
-    
-
-    <div className='h-screen w-screen pt-[100px] flex justify-center  '>
+    <div className="min-h-screen w-full bg-white relative">
+  {/* Purple Gradient Grid Left Background */}
+  <div
+    className="absolute inset-0 z-0"
+    style={{
+      backgroundImage: `
+        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px),
+        radial-gradient(circle 800px at 0% 200px, #d5c5ff, transparent)
+      `,
+      backgroundSize: "96px 64px, 96px 64px, 100% 100%",
+    }}
+  />
+     {/* Your Content/Components */}
+    <div className='h-screen w-screen relative z-10 pt-[30px] flex justify-center  '>
       <div className='flex flex-col gap-2  items-center p-2 min-w-[30%] mb-6 pt-5 border-2 border-black rounded-2xl '>
         <img src="https://placehold.co/200x200" alt="" srcset="" className='rounded-[50%] h-[100px] sm:h-[200px]' />
         <h1 className='text-2xl font-bold'>{profiledata?.person.name}</h1>
@@ -35,6 +47,8 @@ profile()
       </div>
       
     </div>
+</div>
+
     
     
   )

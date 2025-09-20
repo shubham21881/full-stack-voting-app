@@ -2,6 +2,7 @@ import { useState,useEffect, useContext } from 'react'
 import { getProfile } from '../API/api'
 import { AuthContext } from '../Context/AuthContext'
 import toast, { Toaster } from 'react-hot-toast';
+import { ConfettiButton } from "./ui/confetti";
 
 export default function CandidateCard({ candidate ,onvote}) {
 
@@ -42,8 +43,10 @@ handleprofiledata()
 
 if (loading) {
         return (
-            <div className="border-2 border-black py-2 card flex flex-col gap-2 items-center">
-                <h3 className="text-xl font-semibold">{candidate.name}</h3>
+            <div className="border-2 border-black py-2 card flex justify-between gap-1 items-center rounded-xl">
+      <img className='rounded-[50%]' src="https://placehold.co/50x50" alt="" />
+
+                <h3 className="sm:text-xl font-semibold">{candidate.name}</h3>
                 <p className="text-gray-600">{candidate.party || "Independent"}</p>
                 <div className="px-2.5 py-1 rounded text-white bg-gray-400">
                     Loading...
@@ -55,19 +58,21 @@ if (loading) {
 
 
   return (
-    <div className="border-2 border-black py-2 card flex flex-col gap-2 items-center">
-            <h3 className="text-xl font-semibold">{candidate.name}</h3>
+    <div className="border-1 border-black py-2 px-2 card flex justify-between  gap-1 items-center  rounded-xl">
+      <img className='rounded-[50%]' src="https://placehold.co/50x50" alt="" />
+            <p className="  text-[15px] sm:text-xl font-semibold">{candidate.name}</p>
             <p className="text-gray-600">{candidate.party || "Independent"}</p>
-            <button
+            <ConfettiButton
                 disabled={false}
-                className={`px-2.5 py-1 rounded text-white ${
-                    isDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 hover:bg-green-600"
+                className={`px-2 text-[15px] sm:text-xl py-1 rounded text-white ${
+                    isDisabled ? "bg-[#A084DC] cursor-not-allowed" : "bg-[#A084DC]"
                 }`}
                 onClick={() => onvote(candidate._id)}
             >
-                {!authUser ? "Login to Vote" : "Vote"}
-            </button>
+                {!authUser ? "Login" :  <ConfettiButton>vote</ConfettiButton>}
+            </ConfettiButton>
             <Toaster />
+           
         </div>
   );
 }

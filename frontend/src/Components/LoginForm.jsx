@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { NavLink, useNavigate } from "react-router-dom"
 import {
   Card,
   CardContent,
@@ -16,7 +17,7 @@ export default function LoginForm({
 
 }) {
 
-
+  
   console.log(props);
   
   return (
@@ -38,11 +39,7 @@ export default function LoginForm({
               <div className="grid gap-3">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
-                    Forgot your password?
-                  </a>
+                 
                 </div>
                 <Input value={props.data.password} onChange={(e) => props.data.setPassword(e.target.value)} id="password" type="password" required />
               </div>
@@ -55,9 +52,7 @@ export default function LoginForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
-                Sign up
-              </a>
+             <NavLink to={'/signup'}>signup</NavLink>
             </div>
           </form>
         </CardContent>

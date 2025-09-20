@@ -85,7 +85,7 @@ function CardFooter({
   return (
     <div
       data-slot="card-footer"
-      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+      className={cn("flex items-center px-1 [.border-t]:pt-1", className)}
       {...props} />
   );
 }

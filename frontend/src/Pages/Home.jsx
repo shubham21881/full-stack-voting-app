@@ -1,9 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { TextAnimate } from "../Components/ui/text-animate";
 function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900">
+
+    <div className="min-h-screen w-full bg-white relative">
+    {/* Dual Gradient Overlay (Bottom) Background */}
+    <div
+      className="absolute inset-0 z-0"
+      style={{
+        backgroundImage: `
+          linear-gradient(to right, rgba(229,231,235,0.8) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(229,231,235,0.8) 1px, transparent 1px),
+          radial-gradient(circle 500px at 20% 100%, rgba(139,92,246,0.3), transparent),
+          radial-gradient(circle 500px at 100% 80%, rgba(59,130,246,0.3), transparent)
+        `,
+        backgroundSize: "48px 48px, 48px 48px, 100% 100%, 100% 100%",
+      }}
+    />
+       {/* Your Content/Components */}
+      
+    <div className="min-h-screen bg-gradient-to-b relative z-10 from-slate-50 to-white text-slate-900">
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 opacity-50 pointer-events-none">
@@ -13,13 +30,23 @@ function Home() {
         <div className="max-w-6xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight ">
+
+            <TextAnimate
+            className={' text-4xl md:text-5xl font-extrabold leading-tight tracking-tight '}
+            animation="blurInUp" by="line" once
+     
+    >
+     
                 Shape your future with secure, simple, and transparent voting
-              </h1>
-              <p className="mt-4 text-lg text-slate-600">
-                Cast your vote in minutes. Real-time results, robust security, and a delightful
-                experience on any device.
-              </p>
+              
+      
+    </TextAnimate>
+              
+    <TextAnimate className="mt-4 text-lg text-slate-600" animation="blurInUp" by="character" once>
+    Cast your vote in minutes. Real-time results, robust security, and a delightful
+    experience on any device.
+    </TextAnimate>
+             
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   to="/candidate"
@@ -156,6 +183,8 @@ function Home() {
         </div>
       </footer>
     </div>
+  </div>
+    
   )
 }
 

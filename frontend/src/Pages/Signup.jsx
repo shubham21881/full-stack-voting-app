@@ -14,10 +14,25 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center h-[80vh] pt-[150px] sm:pt-[200px] py-3">
+<div className="min-h-screen w-full bg-white relative">
+  {/* Purple Gradient Grid Left Background */}
+  <div
+    className="absolute inset-0 z-0"
+    style={{
+      backgroundImage: `
+        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px),
+        radial-gradient(circle 800px at 0% 200px, #d5c5ff, transparent)
+      `,
+      backgroundSize: "96px 64px, 96px 64px, 100% 100%",
+    }}
+  />
+     {/* Your Content/Components */}
+   
+    <div className="flex justify-center relative z-10 items-center h-[80vh] pt-[50px]  py-3">
       <div className="card w-96 p-2.5">
         <h2 className="text-2xl text-center font-bold mb-4">Signup</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-1">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-1 bg-white p-5 rounded-2xl">
           <input
             type="text"
             placeholder="Full Name"
@@ -82,5 +97,9 @@ export default function Signup() {
         </form>
       </div>
     </div>
+</div>
+
+
+
   );
 }

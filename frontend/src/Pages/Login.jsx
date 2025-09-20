@@ -34,7 +34,23 @@ export default function Login() {
   };
 
   return (
-    <div className="flex pt-[200px] justify-center items-center h-[80vh]">
+
+<div className="min-h-screen w-full bg-white relative">
+  {/* Purple Gradient Grid Left Background */}
+  <div
+    className="absolute inset-0 z-0"
+    style={{
+      backgroundImage: `
+        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px),
+        radial-gradient(circle 800px at 0% 200px, #d5c5ff, transparent)
+      `,
+      backgroundSize: "96px 64px, 96px 64px, 100% 100%",
+    }}
+  />
+     {/* Your Content/Components */}
+    
+    <div className="flex pt-[50px] justify-center relative z-10 items-center h-[80vh]">
       <LoginForm data={{submit:handleSubmit,aadharCardNumber:aadharCardNumber,password:password,setAadharCardNumber:setAadharCardNumber,setPassword:setPassword}}/>
       <Toaster />
       {/* <div className="card w-96">
@@ -61,5 +77,8 @@ export default function Login() {
         </form>
       </div> */}
     </div>
+</div>
+
+
   );
 }
