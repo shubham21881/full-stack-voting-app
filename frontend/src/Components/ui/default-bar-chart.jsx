@@ -35,7 +35,7 @@ const chartConfig = {
   }
 };
 
-export function DefaultBarChart() {
+export function DefaultBarChart({props}) {
   return (
     <Card>
       <CardHeader>

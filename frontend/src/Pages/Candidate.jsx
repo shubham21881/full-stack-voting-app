@@ -6,6 +6,29 @@ import { AuthContext } from '../Context/AuthContext';
 import toast, { Toaster } from 'react-hot-toast';
 import OrbitProgress from "react-loading-indicators/OrbitProgress";
 
+// import { CrowdCanvas, Skiper39 } from "../Components/ui/skiper-ui/skiper39";
+
+
+
+// // Using the complete component
+// const DemoSkiper39 = () => {
+//   return <Skiper39 />;
+// };
+
+// // Using just the crowd canvas
+// const CustomCrowd = () => {
+//   return (
+//     <div className="relative  h-[80%] w-full">
+//       <CrowdCanvas src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/open-peeps-sheet.png" rows={15} cols={7} />
+//     </div>
+//   );
+// };
+
+
+
+
+
+
 
 
 function Candidate() {
@@ -92,6 +115,11 @@ const {user,refreshUser}=useContext(AuthContext)
                     return <CandidateCard key={c._id} candidate={c} onvote={handlevote} />
                 })}
             </div>
+            {/* <div className='h-[100px]'>
+
+        <CustomCrowd/>
+            </div> */}
+           
         </div>
 </div>
   )

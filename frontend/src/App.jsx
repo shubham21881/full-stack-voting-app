@@ -19,6 +19,19 @@ import Updatepassword from './Pages/Updatepassword'
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
  const router= createBrowserRouter([
   {
     path:"/",
@@ -58,7 +71,10 @@ function App() {
 
   return (
     <>
-    
+      {/* <Skiper39/> */}
+      {/* <CustomCrowd/> */}
+      {/* <CrowdCanvas/> */}
+     
       
       <RouterProvider router={router}/>
       {/* <Updatepassword/> */}
