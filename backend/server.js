@@ -5,6 +5,7 @@ import db from './db.js'
 import CandidateRouter from './routes/CandidateRoutes.js'
 import UserRouter from './routes/UserRoutes.js'
 
+
 const app = express();
 
 // Add request logging middleware
