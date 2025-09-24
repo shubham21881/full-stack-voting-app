@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
  function Updatepassword() {
     const navigate=useNavigate()
     const {refreshUser}=useContext(AuthContext)
- const notify = (error) => toast(`${error}`);
+ 
       const [currentpassword,setcurrentpassword]=useState("")
        const[newpassword,setnewpassword]=useState('')
        const [loading, setloading]=useState(false)

@@ -4,17 +4,24 @@ import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../Components/LoginForm";
 import toast, { Toaster } from 'react-hot-toast';
-
+import { useForm } from "react-hook-form";
 
 export default function Login() {
-  const notify = (error) => toast(`${error}`);
+   const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm({
+    criteriaMode: "firstError"  
+  });
+  
   const { Login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [aadharCardNumber, setAadharCardNumber] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const Submit = async (e) => {
     e.preventDefault();
     setError("");
     try {
@@ -22,14 +29,15 @@ export default function Login() {
      console.log(res);
      
      if(res.user.role==='admin'){
-       navigate("/admin"); // Redirect to home page after successful login
+       navigate("/admin"); 
 
      }else{
-      navigate('/')
+      navigate('/candidate')
      }
     } catch (err) {
+      console.log(err)
       // setError(err.response?.data?.error || "Login failed");
-      notify(err.response?.data?.err || "login failed")
+      toast.error(err.response?.data?.error || "login failed")
     }
   };
 
@@ -51,7 +59,7 @@ export default function Login() {
      {/* Your Content/Components */}
     
     <div className="flex pt-[50px] justify-center relative z-10 items-center h-[80vh]">
-      <LoginForm data={{submit:handleSubmit,aadharCardNumber:aadharCardNumber,password:password,setAadharCardNumber:setAadharCardNumber,setPassword:setPassword}}/>
+      <LoginForm data={{submit:Submit,aadharCardNumber:aadharCardNumber,password:password,setAadharCardNumber:setAadharCardNumber,setPassword:setPassword}}/>
       <Toaster />
       {/* <div className="card w-96">
         <h2 className="text-2xl font-bold mb-4">Login</h2>

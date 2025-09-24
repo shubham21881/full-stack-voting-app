@@ -45,7 +45,7 @@ router.post('/signup',async (req,res)=>{
         res.status(200).json({user:response, token:token})
 
      } catch (error) {
-        console.error(error);
+        // console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
      }
  
@@ -90,11 +90,11 @@ router.post('/login',async(req,res)=>{
 
 router.get('/profile' ,jwtAuthMiddleware,async(req,res)=>{
   const profiledata= req.person
-  console.log(profiledata);
+  // console.log(profiledata);
   const userid= profiledata.id
   
   const person= await user.findById(userid)
-  console.log(person);
+  // console.log(person);
   
     res.status(200).json({person})
 })
@@ -111,7 +111,7 @@ router.put('/profile/password',jwtAuthMiddleware,async(req,res)=>{
       }
 
       const person= await user.findById(userid)
-      console.log(person);
+      // console.log(person);
       
 
 if (!person || !(await person.comparePassword(currentPassword))) {
@@ -121,11 +121,11 @@ if (!person || !(await person.comparePassword(currentPassword))) {
       person.password = newPassword;
       await person.save();
 
-      console.log('password updated');
+      // console.log('password updated');
       res.status(200).json({ message: 'Password updated' });
 
    } catch (error) {
-    console.error(error);
+    // console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
    }
 

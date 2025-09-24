@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Navbar } from './Index'
 import { CrowdCanvas, Skiper39 } from "./ui/skiper-ui/skiper39";
-
+import { AnimatePresence, motion } from "framer-motion";
 
 
 // Using the complete component
@@ -28,7 +28,18 @@ function Layout() {
   <>
   
   <Navbar/>
-  <Outlet/>
+   <motion.div
+          key={location.pathname} // important: re-render on route change
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -30 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
+          <div className=' pt-[50px]'>
+
+          <Outlet />
+          </div>
+        </motion.div>
   <CustomCrowd/>
   
   

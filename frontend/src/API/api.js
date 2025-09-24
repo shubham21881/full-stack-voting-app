@@ -58,16 +58,30 @@ api.interceptors.response.use(
 
 
 export const signupuser=  async(data)=>{
-    const res= await api.post('/user/signup',data);
-    console.log(res);
-    
-    return res.data;
+    try{
+
+        const res= await api.post('/user/signup',data);
+        console.log(res);
+        
+        return res.data;
+    }catch(error){
+        // console.log(error);
+        
+        throw error
+    }
 
 }
 
 export const login=async(aadharCardNumber,password)=>{
-    const res= await api.post('/user/login',{aadharCardNumber,password})
-    return res.data
+    try{
+
+        const res= await api.post('/user/login',{aadharCardNumber,password})
+        return res.data
+    }catch(error){
+        // console.log(error);
+        
+        throw error
+    }
 }
 
 

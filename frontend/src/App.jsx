@@ -13,7 +13,7 @@ import AdminDashboard from './Pages/AdminDashboard'
 import ErrorPage from './Pages/ErrorPage'
 import Layout from './Components/Layout'
 import Updatepassword from './Pages/Updatepassword'
-
+import { ReactLenis, useLenis } from 'lenis/react'
 
 
 
@@ -61,6 +61,10 @@ import Updatepassword from './Pages/Updatepassword'
 function App() {
   
 
+// const lenis = useLenis((lenis) => {
+//     // called every scroll
+//     console.log(lenis)
+//   })
 
 
 
@@ -75,7 +79,7 @@ function App() {
       {/* <CustomCrowd/> */}
       {/* <CrowdCanvas/> */}
      
-      
+       <ReactLenis root />
       <RouterProvider router={router}/>
       {/* <Updatepassword/> */}
     </>

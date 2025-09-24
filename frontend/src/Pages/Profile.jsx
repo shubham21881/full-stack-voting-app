@@ -36,7 +36,7 @@ profile()
      {/* Your Content/Components */}
     <div className='h-screen w-screen relative z-10 pt-[30px] flex justify-center  '>
       <div className='flex flex-col gap-2  items-center p-2 min-w-[30%] mb-6 pt-5 border-2 border-black rounded-2xl '>
-        <img src="https://placehold.co/200x200" alt="" srcset="" className='rounded-[50%] h-[100px] sm:h-[200px]' />
+        <img src="https://placehold.co/200x200" alt=""  className='rounded-[50%] h-[100px] sm:h-[200px]' />
         <h1 className='text-2xl font-bold'>{profiledata?.person.name}</h1>
         <p>AadharCardNumer:{profiledata?.person.aadharCardNumber}</p>
         <p>Role:{profiledata?.person.role}</p>
