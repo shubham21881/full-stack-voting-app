@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
-dotenv.config()
+
 // this is only middleware only checking
 
 const jwtAuthMiddleware=(req,res,next)=>{

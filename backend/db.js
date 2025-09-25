@@ -14,5 +14,3 @@ const db=mongoose.connection
 export default db
 
 
-//  username==> krishanmouryash_db_user
-// password===> tYEMcVt9wiVxkMXR
