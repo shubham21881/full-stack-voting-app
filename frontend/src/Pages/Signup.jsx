@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "../Components/ui/button";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 
