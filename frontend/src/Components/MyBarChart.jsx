@@ -3,7 +3,7 @@ import {
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-  } from "@/components/ui/chart";
+  } from "./ui/chart";
   
   import { BarChart, Bar, CartesianGrid, XAxis } from "recharts";
   
