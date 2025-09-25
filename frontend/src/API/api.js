@@ -3,7 +3,7 @@ import { API_BASE_URL } from '../config/Config';
 
  const publicApi=axios.create({
     baseURL:API_BASE_URL,
-    withCredentials:true,
+    // withCredentials:true,
     headers:{
         "Content-Type":'application/json'
     }
@@ -14,7 +14,7 @@ import { API_BASE_URL } from '../config/Config';
 // protected API instance (require auth)
 const api=axios.create({
     baseURL:API_BASE_URL,
-    withCredentials:true,
+    // withCredentials:true,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -60,7 +60,7 @@ api.interceptors.response.use(
 export const signupuser=  async(data)=>{
     try{
 
-        const res= await api.post('/user/signup',data);
+        const res= await publicApi.post('/user/signup',data);
         console.log(res);
         
         return res.data;
@@ -75,7 +75,7 @@ export const signupuser=  async(data)=>{
 export const login=async(aadharCardNumber,password)=>{
     try{
 
-        const res= await api.post('/user/login',{aadharCardNumber,password})
+        const res= await publicApi.post('/user/login',{aadharCardNumber,password})
         return res.data
     }catch(error){
         // console.log(error);
