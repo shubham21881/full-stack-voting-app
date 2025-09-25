@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import MyBarChart from "../Components/MyBarChart";
-import { DefaultMultipleBarChart } from '../Components/ui/default-multiple-bar-chart';
-import { DefaultBarChart } from '../Components/ui/default-bar-chart';
-import { AnimatedHatchedPatternAreaChart } from '../Components/ui/animated-hatched-pattern-chart';
+
 import VoteResultsChart from '../Components/VoteResultsChart';
 import OrbitProgress from "react-loading-indicators/OrbitProgress";
 
@@ -62,10 +59,7 @@ function VoteResults() {
         {/* Your Content/Components */}
         <div className="relative z-10 pt-[30px] bg-white/70 backdrop-blur-sm">
           <div className="sm:w-full h-full">
-            {/* <MyBarChart /> */}
-            {/* <DefaultMultipleBarChart/> */}
-            {/* <DefaultBarChart/> */}
-            {/* <AnimatedHatchedPatternAreaChart/> */}
+          
             <VoteResultsChart />
           </div>
           <h1 className="text-2xl text-center m-2 font-bold mb-4">Election Results</h1>
