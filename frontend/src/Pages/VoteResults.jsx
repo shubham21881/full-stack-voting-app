@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import { API_BASE_URL } from '../config/Config.js';
 import VoteResultsChart from '../Components/VoteResultsChart';
 import OrbitProgress from "react-loading-indicators/OrbitProgress";
 
@@ -15,7 +15,7 @@ function VoteResults() {
         const fetchVoteCounts = async () => {
             try {
                 // Direct fetch test
-                const response = await fetch('http://localhost:3000/candidate/vote/count');
+                const response = await fetch(`${API_BASE_URL}/candidate/vote/count`);
                 console.log('Response status:', response.status);
                 
                 if (!response.ok) {
