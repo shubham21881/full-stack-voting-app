@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use(cors({
-    origin: "*",
+    origin: ['https://full-stack-voting-app.vercel.app/'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
