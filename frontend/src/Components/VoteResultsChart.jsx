@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Bar, BarChart, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart"
 import { getVoteCounts } from '../API/api'
 
 // Color palette for different parties
